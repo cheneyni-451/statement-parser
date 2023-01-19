@@ -1,0 +1,9 @@
+# Python
+.env
+__pycache__/
+
+# IDE
+.vscode/
+
+# Private
+statements/
