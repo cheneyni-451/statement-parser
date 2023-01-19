@@ -28,7 +28,7 @@ class Transaction(ABC):
         return self._is_debit
 
     def __repr__(self) -> str:
-        return f'{self.transaction_date} ${self.transaction_amount} {self.transaction_description}'
+        return f"{self.transaction_date} ${self.transaction_amount:.2f} {self.transaction_description}"
 
 
 class TruistTransaction(Transaction):
@@ -43,5 +43,7 @@ class TruistTransaction(Transaction):
             transaction_year, int(re_match.group("month")), int(re_match.group("day"))
         )
         self._transaction_description = re_match.group("description")
-        self._transaction_amount = float(re_match.group("amount"))
+
+        amount = re_match.group("amount").replace(",", "")
+        self._transaction_amount = float(amount)
         self._is_debit = is_debit
